@@ -22,7 +22,10 @@ Route::get('news/fetchAll','NewsController@fetchAll');
 
 Route::post('people/register','PeopleController@store');
 Route::post('people/login','PeopleController@login');
-Route::post('people/change-password','PeopleController@changePassword');
+
+Route::post('people/{id}/change-password','PeopleController@changePassword');
+Route::any('people/{id}','PeopleController@getUserByID');
+Route::any('people/{id}/update','PeopleController@updateUserByID');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

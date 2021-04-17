@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -109,6 +110,13 @@ class Handler extends ExceptionHandler
                     'http_response' => 404,
                     'status_code' => 0,
                 ], 404);
+            }
+            if ($exception instanceof QueryException) {
+                return response()->json([
+                    'message' => '422 Query Exception',
+                    'http_response' => 422,
+                    'status_code' => 3,
+                ], 422);
             }
             return parent::render($request, $exception);
 

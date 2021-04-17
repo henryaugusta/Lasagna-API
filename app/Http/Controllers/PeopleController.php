@@ -27,12 +27,11 @@ class PeopleController extends Controller
     }
 
 
-    function changePassword(Request $request)
+    function changePassword($id,Request $request)
     {
-        $user_id = $request->people_id;
+        $user_id = $id;
 
         $this->validate($request, [
-            'people_id' => 'required',
             'new_password' => 'required|min:6',
             'old_password' => 'required|min:6'
         ]);
@@ -44,7 +43,7 @@ class PeopleController extends Controller
         if (!$hasher->check($request->old_password, $user->password)) {
             return response()->json([
                 'http_response' => 400,
-                'status' => 0, 
+                'status' => 3, 
                 'message_id' => 'Password Lama Tidak Sesuai',
                 'message' => 'Old Password did not match',
             ]);
@@ -56,6 +55,7 @@ class PeopleController extends Controller
                 return response()->json([
                     'http_response' => 200,
                     'status' => 1,
+                    'user_id' => $user->id,
                     'message_id' => 'Password Berhasil Diupdate',
                     'message' => 'Password updated',
                 ]);
@@ -73,23 +73,6 @@ class PeopleController extends Controller
     }
 
 
-
-    function updatePassword()
-    {
-        $people = People::all();
-
-        $response = array();
-        $response['status'] = 1;
-        $response['http_code'] = 1;
-        $response['data_length'] = count($people);
-        $response['data'] = $people;
-
-        return response()->json([
-            'message' => "Unauthorized, Api Key Mismatch",
-            'http_response' => 401,
-            'status_code' => 0,
-        ], 401);
-    }
 
     /**
      * store the request sell
@@ -116,7 +99,7 @@ class PeopleController extends Controller
         $object->nama = $request->nama;
         $object->username = $request->username;
         $object->email = $request->email;
-        $object->password = $request->password;
+        $object->password =  bcrypt($request->password);
         $object->jk = $request->jk;
         $object->no_telp = $request->no_telp;
 
@@ -180,5 +163,70 @@ class PeopleController extends Controller
             ]);
         }
         return back()->withInput($request->only('nisn', 'remember'));
+    }
+
+    function getUserByID($id){
+        $user = People::where('id','=',$id)->count();
+        if($user==0){
+            return response()->json([
+                'http_response' => 404,
+                'status' => 0,
+                'message_id' => 'User Tidak Ditemukan',
+                'message' => 'User Not Found',
+            ]);
+        }else{
+            $user = People::find($id);
+            return response()->json([
+                'http_response' => 200,
+                'status' => 1,
+                'user' => $user,
+                'message_id' => 'User Ditemukan',
+                'message' => 'User Found',
+            ]);
+        }
+    }
+    function updateUserByID($id,Request $request){
+   
+        $user = People::findOrFail($id);
+        if ($request->nama  != null) {
+            $user->nama = $request->nama;
+        }
+        if ($request->username  != null) {
+            $user->username = $request->username;
+        }
+        if ($request->email  != null) {
+            $user->email = $request->email;
+        }
+        if ($request->nik  != null) {
+            $user->nik = $request->nik;
+        }
+        if ($request->no_telp != null) {
+            $user->no_telp = $request->no_telp;
+        }
+        if ($request->jk != null) {
+            $user->jk = $request->jk;
+        }
+
+        $user->update();
+
+        if($user){
+            $user = People::find($id);
+            return response()->json([
+                'http_response' => 200,
+                'status' => 1,
+                'message_id' => 'Berhasil Mengupdate Profile',
+                'message' => 'User Found',
+                'user' => $user,
+            
+            ]);
+        }else{
+            return response()->json([
+                'http_response' => 404,
+                'status' => 0,
+                'message_id' => 'Gagal Mengupdate Profile',
+                'message' => 'User Not Found',
+            ]);
+          
+        }
     }
 }
