@@ -175,9 +175,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        //Laravel Excel for import data
-        // Maatwebsite\Excel\ExcelServiceProvider::class,
-
         //Datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
 
