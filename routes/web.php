@@ -23,7 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::redirect('/','/login');
+Route::redirect('/','/login/admin');
 
 Route::view('login/santri','auth.login_santri');
 

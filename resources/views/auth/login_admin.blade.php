@@ -94,11 +94,11 @@
                 <div class="col-lg-5 col-md-7 bg-white round-top-right round-bottom-right">
                     <div class="p-3">
                         <div class="text-center">
-                            <img width="150px" height="150px"
-                                src="{{ URL::to('/bootstrap_ui/') }}/assets/images/albinaa.png" alt="wrapkit">
+                            <img width="150px" height="170px"
+                                src="{{ URL::to('/bootstrap_ui/') }}/assets/images/big_logo.png" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Sign In</h2>
-                        <p class="text-center">Admin Satgas Covid 19 Kota Bandung</p>
+                        <p class="text-center">Admin Satgas Covid 19 Kepri</p>
                         <form class="mt-4" action="{{ url('/login/admin/proc') }}" method="post">
                             {{ csrf_field() }}
 
@@ -144,7 +144,7 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    Satgas Covid 19 Kota Bandung © {{ \Carbon\Carbon::now()->year }} <br>
+                                    Satgas Covid 19 Kepri © {{ \Carbon\Carbon::now()->year }} <br>
                                     {{-- <a href="{{ url('/login/santri') }}"><small>Klik Disini Untuk Login
                                             Santri</small></a> --}}
                                 </div>

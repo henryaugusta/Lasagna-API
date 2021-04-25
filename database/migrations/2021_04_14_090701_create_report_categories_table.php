@@ -15,6 +15,10 @@ class CreateReportCategoriesTable extends Migration
     {
         Schema::create('report_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('category_name');
+            $table->string('category_img');
+            $table->string('deleted_at');
+            $table->string('deleted_by');
             $table->timestamps();
         });
     }

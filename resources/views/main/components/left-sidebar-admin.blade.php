@@ -8,20 +8,20 @@
                         aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                             class="hide-menu">Dashboard</span></a></li>
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Mutabaah</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">News Feed</span></li>
 
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/data/mutabaah/create') }}"
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/news/create') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                            class="hide-menu">Buat Jadwal Mutabaah
+                            class="hide-menu">Create News Feed
                         </span></a>
                 </li>
-                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/data/mutabaah/manage') }}"
+                <li class="sidebar-item"><a class="sidebar-link" href="{{ URL('admin/news/manage') }}"
                         aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                            class="hide-menu">Manage Jadwal
+                            class="hide-menu">Manage News Feed
                         </span></a>
                 </li>
                 <li class="list-divider"></li>
-                <li class="nav-small-cap"><span class="hide-menu">Laporan Mutaba'ah</span></li>
+                <li class="nav-small-cap"><span class="hide-menu">Manage Kategori Reporting</span></li>
 
                 <li class="sidebar-item active">
                     <a class="sidebar-link" href="{{ URL('admin/data/mutabaah/report/check') }}"

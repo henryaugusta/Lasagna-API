@@ -115,7 +115,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'message' => '422 Query Exception',
                     'http_response' => 422,
-                    'status_code' => 3,
+                    'status_code' => 0,
                 ], 422);
             }
             return parent::render($request, $exception);

@@ -26,11 +26,11 @@ Route::post('people/login','PeopleController@login');
 Route::post('people/{id}/change-password','PeopleController@changePassword');
 Route::any('people/{id}','PeopleController@getUserByID');
 Route::any('people/{id}/update','PeopleController@updateUserByID');
+Route::post('people/{id}/update_photo','PeopleController@updatePhotoByID');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 
 Route::prefix('people')->group(function(){

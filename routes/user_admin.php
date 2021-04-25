@@ -12,14 +12,29 @@ Route::delete('/guru/{id}/adminDelete','GuruController@deleteAjax');
 
 Route::get('/group/{id}/detail','GroupController@viewDetail');
 
+Route::get('/news/{id}/edit','NewsController@viewNewsEdit');
+Route::post('/news/{id}/edit','NewsController@update');
+Route::post('/news/store','NewsController@store');
+Route::delete('/news/{id}/delete','NewsController@destroy');
+
+
 Route::group(['prefix' => 'post', 'middleware' => ['auth']], function(){
     Route::get('all','Controller@post');
     Route::get('user','Controller@post');    
+
+
 });
+
+
 
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
     Route::view('/data/santri/import','admin.santri.import');
     Route::view('/data/guru/import','admin.guru.import');
+
+    Route::get('/news/create','NewsController@viewAdminCreate');
+    Route::get('/news/manage','NewsController@viewAdminManage');
+    Route::post('/news/manage','NewsController@viewAdminManage');
+
     Route::get('/data/mutabaah/create','MutabaahController@viewAdminCreate');
     Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
     Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');

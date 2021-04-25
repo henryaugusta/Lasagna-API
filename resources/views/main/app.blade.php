@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>{{config('app.name')}}</title>
+    <title>{{ config('app.name') }}</title>
     <!-- Custom CSS -->
     <link href="{{ URL::to('bootstrap_ui') }}/assets/extra-libs/c3/c3.min.css" rel="stylesheet">
     <link href="{{ URL::to('bootstrap_ui') }}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -25,6 +25,17 @@
     <link href="{{ url('bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
 
     @yield('style')
+
+    <style>
+        .center-cropped {
+            object-fit: cover;
+            /* background-position: center center;
+            background-repeat: no-repeat; */
+            width: 150px;
+            height: 100px;
+            border-radius: 20% !important;
+        }
+    </style>
 
     <!-- Custom CSS -->
     <link href="{{ URL::to('bootstrap_ui') }}/dist/css/style.min.css" rel="stylesheet">
@@ -163,6 +174,7 @@
 
     <script>
         // document.body.style.zoom = 0.8
+
     </script>
 
 

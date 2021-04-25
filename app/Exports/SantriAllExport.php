@@ -4,11 +4,9 @@ namespace App\Exports;
 
 use App\Models\Activity;
 use App\Models\Mutabaah;
-use App\Models\Santri;
 use App\Models\SantriMutabaahRecord;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 
 class SantriAllExport  implements FromView

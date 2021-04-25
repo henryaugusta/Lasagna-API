@@ -26,8 +26,56 @@ class PeopleController extends Controller
         ], 401);
     }
 
+    function updatePhotoByID(Request $request, $id)
+    {
 
-    function changePassword($id,Request $request)
+        $response = array();
+        $user = People::findOrFail($id);
+
+        if ($request->hasFile('photo')) {
+
+            $file_path = public_path().$user->photo_path;
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            }
+            
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension(); // you can also use file name
+            $fileName = $user->id . '.' . $extension;
+
+            $savePath = "/web_files/user_profile/$id/";
+            $savePathDB = "/web_files/user_profile/$id/$fileName";
+            $path = public_path() . "$savePath";
+            $upload = $file->move($path, $fileName);
+
+            $user->photo_path=$savePathDB;
+            $user->save();
+
+            if ($user && $user) {
+                $response = [
+                    'http_response' => 200,
+                    'status_code' => 1,
+                    'message_id' => 'Berhasil Mengupdate Foto Profil',
+                    'message' => 'Success',
+                ];
+            }
+
+          
+        } else {
+            $response = [
+                'message' => "Photo should be provided",
+                'http_response' => 401,
+                'status_code' => 3,
+            ];
+        }
+
+        return response()->json(
+            $response
+        );
+    }
+
+
+    function changePassword($id, Request $request)
     {
         $user_id = $id;
 
@@ -43,7 +91,7 @@ class PeopleController extends Controller
         if (!$hasher->check($request->old_password, $user->password)) {
             return response()->json([
                 'http_response' => 400,
-                'status' => 3, 
+                'status' => 3,
                 'message_id' => 'Password Lama Tidak Sesuai',
                 'message' => 'Old Password did not match',
             ]);
@@ -68,8 +116,6 @@ class PeopleController extends Controller
                 ]);
             }
         }
-
-     
     }
 
 
@@ -165,16 +211,17 @@ class PeopleController extends Controller
         return back()->withInput($request->only('nisn', 'remember'));
     }
 
-    function getUserByID($id){
-        $user = People::where('id','=',$id)->count();
-        if($user==0){
+    function getUserByID($id)
+    {
+        $user = People::where('id', '=', $id)->count();
+        if ($user == 0) {
             return response()->json([
                 'http_response' => 404,
                 'status' => 0,
                 'message_id' => 'User Tidak Ditemukan',
                 'message' => 'User Not Found',
             ]);
-        }else{
+        } else {
             $user = People::find($id);
             return response()->json([
                 'http_response' => 200,
@@ -185,8 +232,9 @@ class PeopleController extends Controller
             ]);
         }
     }
-    function updateUserByID($id,Request $request){
-   
+    function updateUserByID($id, Request $request)
+    {
+
         $user = People::findOrFail($id);
         if ($request->nama  != null) {
             $user->nama = $request->nama;
@@ -209,7 +257,7 @@ class PeopleController extends Controller
 
         $user->update();
 
-        if($user){
+        if ($user) {
             $user = People::find($id);
             return response()->json([
                 'http_response' => 200,
@@ -217,16 +265,15 @@ class PeopleController extends Controller
                 'message_id' => 'Berhasil Mengupdate Profile',
                 'message' => 'User Found',
                 'user' => $user,
-            
+
             ]);
-        }else{
+        } else {
             return response()->json([
                 'http_response' => 404,
                 'status' => 0,
                 'message_id' => 'Gagal Mengupdate Profile',
                 'message' => 'User Not Found',
             ]);
-          
         }
     }
 }
