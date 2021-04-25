@@ -24,10 +24,18 @@
                 <li class="nav-small-cap"><span class="hide-menu">Manage Kategori Reporting</span></li>
 
                 <li class="sidebar-item active">
-                    <a class="sidebar-link" href="{{ URL('admin/data/mutabaah/report/check') }}"
+                    <a class="sidebar-link" href="{{ URL('report_category/create') }}"
                         aria-expanded="false">
                         <i data-feather="tag" class="feather-icon"></i>
-                        <span class="hide-menu">Seluruh Santri
+                        <span class="hide-menu">Buat Kategori
+                        </span>
+                    </a>
+                </li>
+                <li class="sidebar-item active">
+                    <a class="sidebar-link" href="{{ URL('report_category/manage') }}"
+                        aria-expanded="false">
+                        <i data-feather="tag" class="feather-icon"></i>
+                        <span class="hide-menu">Manage Kategori
                         </span>
                     </a>
                 </li>

@@ -17,6 +17,15 @@ Route::post('/news/{id}/edit','NewsController@update');
 Route::post('/news/store','NewsController@store');
 Route::delete('/news/{id}/delete','NewsController@destroy');
 
+Route::get("/report_category/manage",'ReportCategoryController@viewManage');
+Route::post("/report_category/manage",'ReportCategoryController@viewManage');
+Route::get("/report_category/create",'ReportCategoryController@viewCreate');
+
+Route::get('/report_category/{id}/edit','ReportCategoryController@viewUpdate');
+Route::post('/report_category/{id}/edit','ReportCategoryController@update');
+Route::delete('/report_category/{id}/delete','ReportCategoryController@destroy');
+Route::post("/report_category/store",'ReportCategoryController@store');
+
 
 Route::group(['prefix' => 'post', 'middleware' => ['auth']], function(){
     Route::get('all','Controller@post');

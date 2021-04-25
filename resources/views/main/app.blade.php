@@ -27,6 +27,10 @@
     @yield('style')
 
     <style>
+        .mycat {
+            display: none object-fit: contain
+        }
+
         .center-cropped {
             object-fit: cover;
             /* background-position: center center;
@@ -35,6 +39,7 @@
             height: 100px;
             border-radius: 20% !important;
         }
+
     </style>
 
     <!-- Custom CSS -->

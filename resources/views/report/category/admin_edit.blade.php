@@ -12,11 +12,11 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item text-muted active" aria-current="page">News Feed</li>
-                        <li class="breadcrumb-item text-muted" aria-current="page">Create News</li>
+                        <li class="breadcrumb-item text-muted" aria-current="page">Edit News Feed</li>
                     </ol>
                 </nav>
             </div>
-            <a href="{{ URL::previous() }}"><button type="button" class="btn btn-primary">⬅ Kembali</button></a>
+            <a href="{{URL::previous()}}"><button type="button" class="btn btn-primary">⬅ Kembali</button></a>
         </div>
         <div class="col-5 align-self-center">
             <div class="customize-input float-right">
@@ -37,29 +37,35 @@
 
         <div class="col-12">
 
-            <form action='{{ url('/report_category/store') }}' method="post" enctype="multipart/form-data">
+            <form action='{{url("/report_category/{$category->id}/edit")}}' method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
+                <input type="hidden" name="id" value="">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title"></h4>
+                        <h4 class="card-title">Edit Kategori</h4>
+
+                        <div>
+                            <img class="rounded-circle mt-2 mb-2 mycat" src="{{url('/').$category->photo_path}}" width="200px" height="200px" alt="">
+                        </div>
 
                         <div class="form-group">
-                            <label for="">Nama Kategori</label>
-                            <input type="text" required class="form-control" name="title" placeholder="Nama Kategori">
+                            <label for="">Judul Kategori</label>
+                            <input type="text" required value="{{$category->category_name}}" class="form-control" name="title"
+                                placeholder="Judul Kategori">
                             <small class="form-text text-muted">Judul Kategori</small>
                         </div>
-
+                        
                         <div class="form-group">
-                          <label for="">Icon Kategori</label>
+                          <label for="">Icon Baru</label>
                           <input type="file" class="form-control-file" name="icon" id="" placeholder="" aria-describedby="fileHelpId">
-                          <small id="fileHelpId" class="form-text text-muted">Icon Untuk Kategori</small>
+                          <small id="fileHelpId" class="form-text text-muted">Tambahkan Gambar Jika Ingin Mengganti Icon</small>
                         </div>
 
-
+                     
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Buat Kategori</button>
+                            <button type="submit" class="btn btn-primary">Update Berita</button>                       
                         </div>
 
                     </div>
