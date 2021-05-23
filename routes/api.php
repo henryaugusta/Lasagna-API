@@ -2,7 +2,6 @@
 use App\Http\Controllers\PeopleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-include __DIR__.'/api_news.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +19,29 @@ return 'test';
 
 Route::get('news/fetchAll','NewsController@fetchAll');
 
+
 Route::post('people/register','PeopleController@store');
 Route::post('people/login','PeopleController@login');
+
 
 Route::post('people/{id}/change-password','PeopleController@changePassword');
 Route::any('people/{id}','PeopleController@getUserByID');
 Route::any('people/{id}/update','PeopleController@updateUserByID');
 Route::post('people/{id}/update_photo','PeopleController@updatePhotoByID');
+
+Route::get('category','ReportCategoryController@getCategory');
+
+Route::post('report/store','ReportController@store');
+Route::any('report/users/{id}','ReportController@getByUsers');
+Route::delete('report/{id}/delete','ReportController@delete');
+Route::get('report/{id}/detail','ReportController@getByID');
+
+Route::post('hospital/store','HospitalController@store');
+Route::any('hospital/fetch','HospitalController@fetch');
+Route::post('hospital/{id}/update','HospitalController@update');
+Route::delete('hospital/{id}/delete','HospitalController@delete');
+Route::get('hospital/{id}/detail','HospitalController@getByID');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

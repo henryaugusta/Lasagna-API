@@ -84,7 +84,6 @@ class NewsController extends Controller
 
     function store(Request $request)
     {
-
         $rules = [
             "title" => "required",
             "cover_link" => "required",

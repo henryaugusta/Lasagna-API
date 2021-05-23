@@ -25,6 +25,11 @@ class Admin extends Authenticatable
         'remember_token',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:00',
+        'updated_at' => 'datetime:Y-m-d H:00',
+    ];
+
 
     public function mutabaah(){
     	return $this->hasMany(Mutabaah::class,'created_by');

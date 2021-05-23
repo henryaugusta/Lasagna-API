@@ -45,7 +45,7 @@
                             <thead class="bg-primary text-white">
                                 <tr>
                                     <th>No</th>
-                                    <th>Judul Kategori</th>
+                                    <th>Judul Kategorigit</th>
                                     <th>Gambar</th>
                                     <th>Edit</th>
                                 </tr>

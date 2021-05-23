@@ -120,4 +120,30 @@ class ReportCategoryController extends Controller
             }
         }
     }
+
+
+
+
+    // <---------------------------------------------------------> 
+    // <----------------------- FOR API -------------------------> 
+
+    function getCategory()
+    {
+
+        $category = ReportCategory::all();
+
+        $response = [
+            'message' => "success",
+            'message_id' => "success",
+            'http_response' => 200,
+            'status_code' => 1,
+            'size' => $category->count(),
+            'data' => $category,
+        
+        ];
+
+        return response()->json(
+            $response
+        );
+    }
 }

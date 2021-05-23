@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\People;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +30,6 @@ class PeopleController extends Controller
 
     function updatePhotoByID(Request $request, $id)
     {
-
         $response = array();
         $user = People::findOrFail($id);
 
@@ -36,7 +37,11 @@ class PeopleController extends Controller
 
             $file_path = public_path().$user->photo_path;
             if (file_exists($file_path)) {
-                unlink($file_path);
+                try{
+                    unlink($file_path);
+                }catch(Exception $e){
+
+                }
             }
             
             $file = $request->file('photo');
@@ -170,7 +175,6 @@ class PeopleController extends Controller
     }
 
     //Login via API
-
     public function login(Request $request)
     {
         $rules = [
@@ -184,6 +188,35 @@ class PeopleController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
+        if (str_contains($request->username,'@')) {
+            if (Auth::guard('admin')->attempt(
+                [
+                    'email' => $request->username,
+                    'password' => $request->password
+                ],
+                $request->get('remember')
+            )) {
+                $id = Auth::guard('admin')->id();
+                $people = Admin::findOrFail($id);
+                return response()->json([
+                    'http_response' => 200,
+                    'status' => 1,
+                    'type' => 'admin',
+                    'message_id' => 'Login Berhasil (Admin)',
+                    'message' => 'Login Successfull (Admin)',
+                    'people' => $people,
+                ]);
+            } else {
+                return response()->json([
+                    'http_response' => 400,
+                    'status' => 0,
+                    'type' => 'admin',
+                    'message_id' => 'Login Gagal (Admin)',
+                    'message' => 'Login Failed (Admin)',
+                ]);
+            }
+        }
+
         if (Auth::guard('people')->attempt(
             [
                 'username' => $request->username,
@@ -196,6 +229,7 @@ class PeopleController extends Controller
             return response()->json([
                 'http_response' => 200,
                 'status' => 1,
+                'type' => 'people',
                 'message_id' => 'Login Berhasil',
                 'message' => 'Login Successfull',
                 'people' => $people,
@@ -204,6 +238,7 @@ class PeopleController extends Controller
             return response()->json([
                 'http_response' => 400,
                 'status' => 0,
+                'type' => 'people',
                 'message_id' => 'Login Gagal',
                 'message' => 'Login Failed',
             ]);

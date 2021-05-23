@@ -11,16 +11,31 @@ class People extends Authenticatable
 
     protected $table = "people";
     protected $fillable = [
+        "id",
         "nama",
-        "nis",
+        "nik",
+        "username",
+        "email",
+        "password",
         "jk",
         "no_telp",
-        "asrama",
-        "kelas",
-        "line_id",
         "photo_path",
-        "jenjang",
-        "remember_token",
-        "password",
+    ];
+
+
+    protected $appends = ['random_time'];
+
+    function getRandomTimeAttribute(){
+        return time();
+    }
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:00',
+        'updated_at' => 'datetime:Y-m-d H:00',
     ];
 }
