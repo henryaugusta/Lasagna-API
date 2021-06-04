@@ -42,6 +42,12 @@ Route::post('hospital/{id}/update','HospitalController@update');
 Route::delete('hospital/{id}/delete','HospitalController@delete');
 Route::get('hospital/{id}/detail','HospitalController@getByID');
 
+Route::post('contact/store','ContactController@store');
+Route::any('contact/fetch','ContactController@fetch');
+Route::post('hospital/{id}/update','HospitalController@update');
+Route::delete('contact/{id}/delete','ContactController@delete');
+Route::get('contact/{id}/detail','ContactController@getByID');
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

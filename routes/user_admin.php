@@ -16,6 +16,7 @@ Route::get('/news/{id}/edit','NewsController@viewNewsEdit');
 Route::post('/news/{id}/edit','NewsController@update');
 Route::post('/news/store','NewsController@store');
 Route::delete('/news/{id}/delete','NewsController@destroy');
+Route::get('/news/create','NewsController@viewAdminCreate');
 
 Route::get("/report_category/manage",'ReportCategoryController@viewManage');
 Route::post("/report_category/manage",'ReportCategoryController@viewManage');
@@ -30,60 +31,7 @@ Route::post("/report_category/store",'ReportCategoryController@store');
 Route::group(['prefix' => 'post', 'middleware' => ['auth']], function(){
     Route::get('all','Controller@post');
     Route::get('user','Controller@post');    
-
-
 });
-
-
-
-Route::group(['prefix'=>'admin','middleware' => ['admin']], function () {
-    Route::view('/data/santri/import','admin.santri.import');
-    Route::view('/data/guru/import','admin.guru.import');
-
-    Route::get('/news/create','NewsController@viewAdminCreate');
-    Route::get('/news/manage','NewsController@viewAdminManage');
-    Route::post('/news/manage','NewsController@viewAdminManage');
-
-    Route::get('/data/mutabaah/create','MutabaahController@viewAdminCreate');
-    Route::any('/data/mutabaah/manage','MutabaahController@viewAdminManage');
-    Route::any('/data/mutabaah/preview','MutabaahController@viewAdminPreview');
-
-    Route::any('/data/mp3','Mp3StreamingController@viewAdminPreview');
-    Route::any('/data/mp3/store','Mp3StreamingController@store')->name('admin.upload.mp3');
-
-    Route::post('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck')->name('admin.mutabaah.search_filter_all');
-    Route::get('/data/mutabaah/report/check','AdminReportMutabaahController@viewCheck');
-
-
-    Route::any('/data/group/create','AdminGroupController@viewAdminCreate');
-    Route::any('/data/group/manage','AdminGroupController@viewAdminManage');
- 
-
-    Route::any('/data/santri/manage','SantriController@viewAdminManage');
-    Route::any('/data/santri/{id}/edit','SantriController@viewAdminEdit');
-
-    Route::any('/data/guru/manage','GuruController@viewAdminManage');
-    Route::any('/data/guru/{id}/edit','GuruController@viewAdminEdit');
-
-    
-    Route::get('/','HomeAdminController@index');
-
-
-});
-
-Route::post('/santri/import','DataController@importExcelSantri')->name('import_santri');
-Route::post('/guru/import','DataController@importExcelGuru')->name('import_guru');
-
-Route::post('/santri/update','SantriController@update');
-Route::delete('/santri/{id}/deleteAjax','SantriController@deleteAjax');
-
-
-Route::post('/mutabaah/store','MutabaahController@store');
-
-Route::get('/mutabaah/eloquent','MutabaahController@testEloquent');
-Route::get('/mutabaah/{id}/fetch','MutabaahController@getById');
-Route::post('/mutabaah/{id}/updateAjax','MutabaahController@updateAjax');
-Route::delete('/mutabaah/{id}/deleteAjax','MutabaahController@deleteAjax');
 
 
 ?>
