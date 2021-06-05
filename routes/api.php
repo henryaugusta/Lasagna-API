@@ -30,11 +30,18 @@ Route::any('people/{id}/update','PeopleController@updateUserByID');
 Route::post('people/{id}/update_photo','PeopleController@updatePhotoByID');
 
 Route::get('category','ReportCategoryController@getCategory');
+Route::post('category/store','ReportCategoryController@store');
+Route::any('category/{id}/delete','ReportCategoryController@destroy');
+Route::post('category/{id}/update','ReportCategoryController@update');
 
 Route::post('report/store','ReportController@store');
 Route::any('report/users/{id}','ReportController@getByUsers');
 Route::delete('report/{id}/delete','ReportController@delete');
 Route::get('report/{id}/detail','ReportController@getByID');
+
+
+Route::post('news/store','NewsController@store');
+Route::delete('news/{id}/delete','NewsController@destroy');
 
 Route::post('hospital/store','HospitalController@store');
 Route::any('hospital/fetch','HospitalController@fetch');
