@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/file_santri
+/public/web_files/
 /public/storage
 /public/bower_components
 /storage/*.key
