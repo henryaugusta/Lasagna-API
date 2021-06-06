@@ -38,6 +38,13 @@ Route::post('report/store','ReportController@store');
 Route::any('report/users/{id}','ReportController@getByUsers');
 Route::delete('report/{id}/delete','ReportController@delete');
 Route::get('report/{id}/detail','ReportController@getByID');
+Route::post('report/{id}/store-response','ResponseController@store');
+
+
+Route::post('response/store','ReportController@store');
+Route::any('report/users/{id}','ReportController@getByUsers');
+Route::delete('report/{id}/delete','ReportController@delete');
+Route::get('report/{id}/detail','ReportController@getByID');
 
 
 Route::post('news/store','NewsController@store');

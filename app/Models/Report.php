@@ -33,25 +33,38 @@ class Report extends Model
         'updated_at' => 'datetime:Y-m-d H:00',
     ];
 
-    protected $appends = ['status_label', 'people', 'category', 'staff'];
+    protected $appends = ['status_label', 'people', 'category', 'staff','response'];
 
     function getPeopleAttribute()
     {
         return People::find($this->id_people);
     }
+    function getResponseAttribute()
+    {
+        return Response::where('report_id','=',$this->id)->orderBy('id','DESC')->get();
+    }
     function getStatusLabelAttribute()
     {
+           /**
+         * Status Code Desc
+         * 0 : Menunggu Diproses
+         * 1 : Sedang Diproses
+         * 2 : Dalam Koordinasi
+         * 3 : Selesai
+         * 4 : Ditolak
+         */
+
         switch ($this->status) {
             case '0':
                 return "Belum Diproses";
                 break;
 
             case '1':
-                return "Koordinasi Pihak Terkait";
+                return "Sedang Diproses";
                 break;
 
             case '2':
-                return "Diproses Pihak Terkait";
+                return "Dalam Koordinasi";
                 break;
 
             case '3':
