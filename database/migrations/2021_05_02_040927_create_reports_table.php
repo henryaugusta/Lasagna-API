@@ -24,6 +24,13 @@ class CreateReportsTable extends Migration
             $table->string('status')->nullable();
             $table->integer('is_public')->nullable();
             $table->text('status_desc')->nullable();
+            $table->text('tanggal_kejadian')->nullable();
+            $table->text('waktu_kejadian')->nullable();
+            $table->text('peyebab_kejadian')->nullable();
+            $table->text('kerusakan_bangunan')->nullable();
+            $table->text('kerusakan_lain')->nullable();
+            $table->text('korban_jiwa')->nullable();
+            $table->text('kondisi_korban')->nullable();
             $table->unsignedBigInteger('id_staff')->nullable();
             $table->unsignedBigInteger('id_people')->nullable();
             $table->unsignedBigInteger('id_category')->nullable();

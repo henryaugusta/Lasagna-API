@@ -12,7 +12,7 @@ class ReportController extends Controller
 {
     /**
      * store the request sell
-     *id	nama	username	email	nik 	password	jk	no_telp	photo_path	remember_token	created_at	updated_at	
+     *id	nama	username	email	nik 	password	jk	no_telp	photo_path	remember_token	created_at	updated_at
      */
     public function store(Request $request)
     {
@@ -63,6 +63,15 @@ class ReportController extends Controller
         $object->id_staff = null;
         $object->id_people = $request->id_people;
         $object->id_category = $request->id_category;
+
+        $object->tanggal_kejadian = $request->tanggal_kejadian;
+        $object->waktu_kejadian = $request->waktu_kejadian;
+        $object->penyebab_kejadian = $request->penyebab_kejadian;
+
+        $object->kerusakan_bangunan = $request->penyebab_kejadian;
+        $object->kerusakan_lain = $request->kerusakan_lain;
+        $object->korban_jiwa = $request->korban_jiwa;
+        $object->kondisi_korban = $request->kondisi_korban;
         $object->save();
 
 
@@ -100,9 +109,9 @@ class ReportController extends Controller
         if ($id=="all" || $id==null) {
             $report = Report::where('id_people', '<>', 0)->orderBy('created_at','desc')
             ->paginate($paginate, ['*'], 'page', $pageNumber);
-    
+
         }
-      
+
         return response()->json([
             'http_response' => 200,
             'status' => 1,
@@ -113,7 +122,7 @@ class ReportController extends Controller
     }
 
     public function delete($id){
-  
+
         $report=Report::find($id);
         if ($report==null) {
             return response()->json([
@@ -124,15 +133,15 @@ class ReportController extends Controller
                 'report' => $report,
             ], 400);
         }else{
-          
+
             $file_path = public_path().$report->photo_path;
             if (file_exists($file_path)) {
                 try{
                     unlink($file_path);
                 }catch(Exception $e){
-    
+
                 }
-            }  
+            }
             $report->delete();
             if ($report) {
                 return response()->json([
@@ -154,7 +163,7 @@ class ReportController extends Controller
         }
     }
     public function getByID($id){
-  
+
         $report=Report::find($id);
         if ($report==null) {
             return response()->json([
