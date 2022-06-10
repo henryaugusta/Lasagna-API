@@ -66,9 +66,9 @@ class ReportController extends Controller
 
         $object->tanggal_kejadian = $request->tanggal_kejadian;
         $object->waktu_kejadian = $request->waktu_kejadian;
-        $object->penyebab_kejadian = $request->penyebab_kejadian;
+        $object->peyebab_kejadian = $request->penyebab_bencana;
 
-        $object->kerusakan_bangunan = $request->penyebab_kejadian;
+        $object->kerusakan_bangunan = $request->kerusakan_bangunan;
         $object->kerusakan_lain = $request->kerusakan_lain;
         $object->korban_jiwa = $request->korban_jiwa;
         $object->kondisi_korban = $request->kondisi_korban;
