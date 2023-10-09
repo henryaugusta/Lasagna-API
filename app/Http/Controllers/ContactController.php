@@ -57,6 +57,7 @@ class ContactController extends Controller
             ]);
         }
     }
+
     function update(Request $request, $id)
     {
         $object = Hospital::findOrFail($id);

@@ -1,5 +1,9 @@
 <?php
+
+use App\Http\Controllers\MyNfcController;
 use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\CIOTDeviceController;
+use App\Http\Controllers\DeviceLogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +23,20 @@ return 'test';
 
 Route::get('news/fetchAll','NewsController@fetchAll');
 
+
+Route::get('nfc-cards/user/{id}', [MyNfcController::class, 'getMyNfcCard']);
+Route::post('nfc-cards/new', [MyNfcController::class, 'create']);
+Route::get('nfc-cards/{id}', [MyNfcController::class, 'read']);
+Route::put('nfc-cards/{id}', [MyNfcController::class, 'update']);
+Route::any('nfc-cards/{id}/delete', [MyNfcController::class, 'delete']);
+
+Route::any('iot/open-door', [CIOTDeviceController::class, 'openDoor']);
+Route::any('iot-close-door', [CIOTDeviceController::class, 'closeDoor']);
+Route::any('iot/turn-on-lamp', [CIOTDeviceController::class, 'turnOnLamp']);
+Route::any('iot/turn-off-lamp', [CIOTDeviceController::class, 'turnOffLamp']);
+
+
+Route::any('log/store', [DeviceLogController::class, 'store']);
 
 Route::post('people/register','PeopleController@store');
 Route::post('people/login','PeopleController@login');

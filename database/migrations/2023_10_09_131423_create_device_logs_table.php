@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMyNfcCardsTable extends Migration
+class CreateDeviceLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMyNfcCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('my_nfc_cards', function (Blueprint $table) {
+        Schema::create('device_logs', function (Blueprint $table) {
             $table->id();
-            $table->string("card_id")->nullable();
-            $table->string("label")->nullable();
-            $table->string("added_by")->nullable();//userId
+            $table->string("event")->nullable();
+            $table->string("device")->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateMyNfcCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('my_nfc_cards');
+        Schema::dropIfExists('device_logs');
     }
 }
