@@ -11,13 +11,10 @@ class DeviceLogController extends Controller
         $eventName = $request->event;
         $device = $request->device;
         $origin = $request->origin;
-
         $data = new DeviceLog();
-
         $data->event = $eventName;
         $data->device = $device;
-        $data->origin = $origin;
-
+//        $data->origin = $origin;
         $data->save();
 
     }

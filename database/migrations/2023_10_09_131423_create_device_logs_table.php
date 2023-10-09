@@ -17,6 +17,7 @@ class CreateDeviceLogsTable extends Migration
             $table->id();
             $table->string("event")->nullable();
             $table->string("device")->nullable();
+            $table->string("device")->nullable();
             $table->timestamps();
         });
     }
