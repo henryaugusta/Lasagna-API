@@ -20,6 +20,7 @@ class DeviceLogController extends Controller
     }
 
     public function checkStatus(){
+
         $token = 'oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x';
         $endpoints = ['v4', 'v5', 'v6', 'v7', 'v8'];
 
