@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use GuzzleHttp\Client;
 
 use App\Models\DeviceLog;
 use Illuminate\Http\Request;
@@ -19,14 +20,16 @@ class DeviceLogController extends Controller
         $data->save();
     }
 
-    public function checkStatus(){
-
+    public function checkStatus()
+    {
         $token = 'oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x';
         $endpoints = ['v4', 'v5', 'v6', 'v7', 'v8'];
 
-        $results = collect($endpoints)->map(function ($endpoint) use ($token) {
-            $response = Http::get("https://blynk.cloud/external/api/get?token={$token}&{$endpoint}");
-            $status = $response->body(); // Assuming 1 or 0 is returned as a string.
+        $client = new Client();
+
+        $results = collect($endpoints)->map(function ($endpoint) use ($client, $token) {
+            $response = $client->get("https://blynk.cloud/external/api/get?token={$token}&{$endpoint}");
+            $status = $response->getBody()->getContents(); // Assuming 1 or 0 is returned as a string.
 
             return [
                 'device' => $endpoint,
@@ -44,7 +47,7 @@ class DeviceLogController extends Controller
         } else {
             $status = 'OKAY';
         }
-        return response()->json(['status' => $status, 'devices' => $results]);
 
+        return response()->json(['status' => $status, 'devices' => $results]);
     }
 }
