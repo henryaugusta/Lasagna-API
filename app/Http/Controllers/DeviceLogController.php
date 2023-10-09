@@ -18,5 +18,7 @@ class DeviceLogController extends Controller
         $data->device = $device;
         $data->origin = $origin;
 
+        $data->save();
+
     }
 }
