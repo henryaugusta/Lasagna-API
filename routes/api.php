@@ -37,6 +37,7 @@ Route::any('iot/turn-off-lamp', [CIOTDeviceController::class, 'turnOffLamp']);
 
 
 Route::any('log/store', [DeviceLogController::class, 'store']);
+Route::any('checkStatus', [DeviceLogController::class, 'checkStatus']);
 
 Route::post('people/register','PeopleController@store');
 Route::post('people/login','PeopleController@login');
