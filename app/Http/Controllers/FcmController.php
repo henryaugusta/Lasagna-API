@@ -43,11 +43,10 @@ class FcmController extends Controller
         $client = new Client();
 
         foreach ($datas as $data) {
+            $token = "";
             $token = $data->token;
-
             // Define the FCM message payload
             $payload = [
-                'token' => $token,
                 'notification' => [
                     'title' => 'Tes Push Notification',
                     'body' => 'Haiyanto jual 2454 lot',
