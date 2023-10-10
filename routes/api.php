@@ -4,6 +4,7 @@ use App\Http\Controllers\MyNfcController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\CIOTDeviceController;
 use App\Http\Controllers\DeviceLogController;
+use App\Http\Controllers\FcmController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::any('iot/turn-off-lamp', [CIOTDeviceController::class, 'turnOffLamp']);
 
 Route::any('log/store', [DeviceLogController::class, 'store']);
 Route::any('checkStatus', [DeviceLogController::class, 'checkStatus']);
+Route::any('store-fcm', [FcmController::class, 'storeNewDevice']);
+Route::any('get-fcm', [FcmController::class, 'getFcm']);
 
 Route::post('people/register','PeopleController@store');
 Route::post('people/login','PeopleController@login');

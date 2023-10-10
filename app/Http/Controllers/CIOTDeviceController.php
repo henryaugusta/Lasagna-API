@@ -17,7 +17,8 @@ class CIOTDeviceController extends Controller
 
     public function turnOnLamp(Request $request){
         $client = new Client();
-        $url = 'https://blynk.cloud/external/api/update?token=oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x&V1=1';
+        $token  ="oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x";
+        $url = "https://blynk.cloud/external/api/update?token=&V1=1";
         try {
             // Make a GET request
             $response = $client->get($url);
@@ -36,7 +37,8 @@ class CIOTDeviceController extends Controller
 
     public function turnOffLamp(Request $request){
         $client = new Client();
-        $url = 'https://blynk.cloud/external/api/update?token=oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x&V1=0';
+        $token  ="oMps6Fj2XqUbsaLs1pCYbr6hl0j59I6x";
+        $url = "https://blynk.cloud/external/api/update?token=$token&V1=0";
         try {
             // Make a GET request
             $response = $client->get($url);
